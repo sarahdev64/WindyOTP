@@ -1,8 +1,9 @@
 import {StatusBar} from 'expo-status-bar';
-import {Text, View, FlatList} from 'react-native';
+import {View, FlatList} from 'react-native';
 import {Link} from 'expo-router';
 import {type CodeList, getCodes} from '../utils/codes';
 import {useEffect, useState} from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
 import OtpCard from '../components/OtpCard';
 
 export default function HomePage() {
@@ -19,15 +20,6 @@ export default function HomePage() {
 
   return (
     <View className="bg-backdrop flex flex-col h-full">
-      <View className="bg-nav p-4 pt-6 flex flex-row justify-evenly">
-        <Text className="font-semibold text-2xl text-txt px-4 py-2">WindyOTP</Text>
-        <View className="rounded-full bg-backdrop">
-          <Link href="/code" className="font-semibold text-3xl text-txt px-4 py-2">+</Link>
-        </View>
-        <View className="rounded-full bg-backdrop">
-          <Link href="/exports" className="font-semibold text-3xl text-txt px-4 py-2">{"\u2197"}</Link>
-        </View>
-      </View>
       <FlatList
         scrollEnabled={true}
         scrollToOverflowEnabled={true}
@@ -44,6 +36,14 @@ export default function HomePage() {
         }}
         keyExtractor={item => item}
       />
+      <View className="flex flex-row justify-center py-2">
+        <View className="rounded-full bg-progress">
+          <Link href="/code" className="text-2xl text-center text-txt w-10 h-10">+</Link>
+        </View>
+        {/*<View className="rounded-full bg-backdrop">*/}
+        {/*  <Link href="/settings" className="font-semibold text-3xl text-txt px-4 py-2">{"\u2197"}</Link>*/}
+        {/*</View>*/}
+      </View>
       <StatusBar style="auto"/>
     </View>
   );

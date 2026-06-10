@@ -36,7 +36,7 @@ export default function OtpCard({ name, data, setRefresh }: { name: string, data
     }, [percentage])
 
     return (
-        <TouchableOpacity className="w-full h-auto bg-card" onLongPress={() => setShowMenu(true)}>
+        <TouchableOpacity className="w-full h-auto bg-card bor border mt-2 border-progress/50 rounded-lg" onLongPress={() => setShowMenu(true)}>
             <View className="flex flex-row px-4 gap-6">
                 <View>
                     <Text className="text-txt text-lg">{name}</Text>
