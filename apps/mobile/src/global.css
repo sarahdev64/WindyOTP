@@ -1,0 +1,17 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+
+@theme {
+    --color-backdrop: "#262626";
+    --color-nav: "#171717";
+    --color-txt: "#ffffff";
+    --color-input: "#ffffff";
+    --color-inputTxt: "#000000";
+    --color-card: "#404040";
+    --color-progress: "#10b981";
+    --color-delete: "#dc2626";
+    --color-rename: "#15803d";
+}

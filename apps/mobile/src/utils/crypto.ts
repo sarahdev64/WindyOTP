@@ -1,23 +1,26 @@
-import { cryptoNative as crypto } from "vanilla-totp";
 import * as expoCrypto from 'expo-crypto';
 import * as Device from "expo-device";
 import * as SecureStore from "expo-secure-store";
 
-const algorithm = "aes-256-cbc"
+// @ts-ignore
+import {cryptoNative} from "vanilla-totp";
+
+const algorithm = "aes-256-cbc";
 
 export async function clearSecret() {
-    const secureKey = await SecureStore.getItemAsync(Buffer.from(Device.modelName).toString("hex") + Device.brand);
-    const ivKey = await SecureStore.getItemAsync(Buffer.from(Device.modelName).toString("hex") + Device.brand + "-iv");
+    const modelName: string = Device.modelName ?? "unknown";
+    const secureKey = await SecureStore.getItemAsync(Buffer.from(modelName).toString("hex") + Device.brand);
+    const ivKey = await SecureStore.getItemAsync(Buffer.from(modelName).toString("hex") + Device.brand + "-iv");
     if (secureKey) {
-        await SecureStore.deleteItemAsync(Buffer.from(Device.modelName).toString("hex") + Device.brand);
+        await SecureStore.deleteItemAsync(Buffer.from(modelName).toString("hex") + Device.brand);
     }
     if (ivKey) {
-        await SecureStore.deleteItemAsync(Buffer.from(Device.modelName).toString("hex") + Device.brand + "-iv");
+        await SecureStore.deleteItemAsync(Buffer.from(modelName).toString("hex") + Device.brand + "-iv");
     }
 }
 
 async function getSecret(): Promise<Uint8Array> {
-    let asyncKey = Buffer.from(Device.modelName).toString("hex") + Device.brand;
+    let asyncKey = Buffer.from(Device.modelName ?? "unkown").toString("hex") + Device.brand;
     let secureKey = await SecureStore.getItemAsync(asyncKey);
     if (secureKey) {
         const secretArray: number[] = Object.values(JSON.parse(secureKey));
@@ -31,8 +34,10 @@ async function getSecret(): Promise<Uint8Array> {
     }
 }
 
+
 async function getIv(): Promise<Uint8Array> {
-    let asyncKey = Buffer.from(Device.modelName).toString("hex") + Device.brand + "-iv";
+    const modelName = Device.modelName ?? "unknown";
+    let asyncKey = Buffer.from(modelName).toString("hex") + Device.brand + "-iv";
     let secureIv = await SecureStore.getItemAsync(asyncKey);
     if (secureIv) {
         const ivArray: number[] = Object.values(JSON.parse(secureIv))
@@ -50,7 +55,7 @@ export async function encrypt(value: string): Promise<string> {
     const secret = await getSecret();
     const iv = await getIv();
     const secretBuffer = Buffer.from(secret);
-    let cipher = crypto.createCipheriv(algorithm, secretBuffer, iv);
+    let cipher = cryptoNative.createCipheriv(algorithm, secretBuffer, iv);
     let encrypted = cipher.update(value, 'utf8', 'hex') + cipher.final('hex');
     return encrypted;
 }
@@ -59,7 +64,7 @@ export async function decrypt(value: string): Promise<string> {
     const secret = await getSecret();
     const iv = await getIv();
     const secretBuffer = Buffer.from(secret);
-    let decipher = crypto.createDecipheriv(algorithm, secretBuffer, iv);
+    let decipher = cryptoNative.createDecipheriv(algorithm, secretBuffer, iv);
     let decrypted = decipher.update(value, 'hex', 'utf8') + decipher.final('utf8');
     return decrypted;
 }

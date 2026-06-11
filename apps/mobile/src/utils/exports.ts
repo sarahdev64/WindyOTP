@@ -29,18 +29,10 @@ export async function codesToGoogle(codes: TotpData[]): Promise<GoogleExports> {
     return newGoogle;
   }
 
-  const exportCodes = await Promise.all(codes.map(async (code) => {
-    let newCodeResult: GoogleCode;
-    const codeRes = await getValues(code).catch((codeErr) => {
-      console.log(codeErr);
-    });
-    if (codeRes) {
-      newCodeResult = codeRes;
-    }
-    return newCodeResult;
+  result.otpParameters = await Promise.all(codes.map(async (code) => {
+    return getValues(code);
   }));
-
-  result.otpParameters = exportCodes;
+  
   return result;
 }
 

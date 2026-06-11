@@ -1,5 +1,3 @@
-import 'react-native-url-polyfill/auto';
-
 export type TotpAlgorithm = "sha1" | "sha256" | "sha512" | "md5"
 export type TotpDigits = 6 | 8
 export type TotpPeriod = 15 | 30 | 60

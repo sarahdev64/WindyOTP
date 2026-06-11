@@ -15,7 +15,7 @@ export default function OtpMenu({ name, data, setShowMenu, setRefresh }: {
 }) {
   const [showConfirm, setShowConfirm] = useState<Boolean>(false)
   const [showRename, setShowRename] = useState<Boolean>(false);
-
+  
   return (
     <>
       {showRename ? (
@@ -38,10 +38,14 @@ export default function OtpMenu({ name, data, setShowMenu, setRefresh }: {
             <>
               <Button title="Delete" className="bg-delete px-2 py-1" onPress={() => {
                 // Add delete code
-                AsyncStorage.getItem(Buffer.from(Device.modelName).toString("hex")).then((res: string) => {
+                AsyncStorage.getItem(Buffer.from(Device.modelName ?? "unknown").toString("hex")).then((res: string | null) => {
+                  if (res === null || res === "") {
+                      return;
+                  }
+                  
                   const codes: CodeList = JSON.parse(res);
                   delete codes.codes[data.account];
-                  AsyncStorage.setItem(Buffer.from(Device.modelName).toString("hex"), JSON.stringify(codes)).then((res) => {
+                  AsyncStorage.setItem(Buffer.from(Device.modelName ?? "unknown").toString("hex"), JSON.stringify(codes)).then((res) => {
                     setRefresh(Math.random())
                   }).catch((err) => {
                     console.log(`Delete error 1: ${err}`)

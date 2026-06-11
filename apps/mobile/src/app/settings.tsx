@@ -4,13 +4,15 @@ import {Link} from "expo-router";
 
 export default function SettingsPage() {
   return (
-    <View className="bg-backdrop flex flex-col h-full">
-      <View className="flex flex-row justify-center">
-        <View className="rounded-full bg-backdrop">
-          <Link href="/" className="font-semibold text-3xl text-txt px-4 py-2">back</Link>
+    <View className="bg-backdrop flex-col h-full">
+      <View className="h-full shrink">
+      </View>
+      <View className="bg-nav flex flex-row justify-evenly py-2">
+        <View className="rounded-full bg-delete">
+          <Link href="/" className="text-2xl text-center text-txt w-10 h-10">x</Link>
         </View>
       </View>
-      <StatusBar style="auto"/>
+      <StatusBar style="auto" hidden={true}/>
     </View>
   );
 }

@@ -1,4 +1,4 @@
-// @ts-check
+// @ts-ignore
 import { getTotp as totp, cryptoNative } from "vanilla-totp";
 import { type TotpData } from "./url";
 

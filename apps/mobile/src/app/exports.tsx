@@ -54,14 +54,8 @@ export default function ExportsPage() {
   }, [codes])
 
   return (
-    <View className="min-h-screen pb-80">
-      <View className="bg-nav p-4 pt-6 flex flex-row justify-evenly">
-        <Text className="font-semibold text-2xl text-txt px-4 py-2">WindyOTP</Text>
-        <View className="rounded-full bg-backdrop">
-          <Link href="/" className="font-semibold text-3xl text-txt px-5 py-2">-</Link>
-        </View>
-      </View>
-      <View className="bg-backdrop min-h-full">
+    <View className="bg-backdrop flex-col h-full">
+      <View className="h-full shrink flex-col justify-center">
         <View className='p-4'>
           {supported ? (
             <>
@@ -94,7 +88,12 @@ export default function ExportsPage() {
           )}
         </View>
       </View>
-      <StatusBar style="auto" />
+      <View className="bg-nav flex flex-row justify-evenly py-2">
+        <View className="rounded-full bg-delete">
+          <Link href="/" className="text-2xl text-center text-txt w-10 h-10">x</Link>
+        </View>
+      </View>
+      <StatusBar style="auto" hidden={true} />
     </View>
   );
 }
