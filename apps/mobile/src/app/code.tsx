@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Button } from 'react-native';
+import {Text, View, Button, Pressable} from 'react-native';
 import { Link, router } from 'expo-router';
 import {useEffect, useRef, useState} from 'react';
 import {Camera, CameraView, useCameraPermissions} from 'expo-camera';
 import { type TotpData, validTotpUrl, parseTotpUrl } from '../utils/url';
 import { addCode } from '../utils/codes';
 import { type GoogleCode, type GoogleExports, decodeMigration, isMigration, toTotpData } from '../utils/import';
+import {Lucide} from "@react-native-vector-icons/lucide";
+import {useUnstableNativeVariable} from "nativewind";
 
 type CodeState = {
   scanned?: boolean,
@@ -14,6 +16,8 @@ type CodeState = {
 }
 
 export default function CodePage() {
+  // @ts-ignore
+  const txtColor = useUnstableNativeVariable("--color-txt");
   const [codeState, setCodeState] = useState<CodeState>({ invalid: false, showScan: true })
   const [permission, requestPermission] = useCameraPermissions({
     get: true,
@@ -98,9 +102,12 @@ export default function CodePage() {
         />
       </View>
       <View className="bg-nav flex flex-row justify-evenly py-2">
-        <View className="rounded-full bg-delete">
-          <Link href="/" className="text-2xl text-center text-txt w-10 h-10">x</Link>
-        </View>
+        <Pressable onPress={() => {
+          // @ts-ignore
+          router.navigate('/');
+        }}>
+          <Lucide size={30} style={{color: txtColor}} className="bg-delete w-16 h-16 rounded-full text-center align-middle" name={"circle-off"}/>
+        </Pressable>
       </View>
       <StatusBar style="auto" hidden={true} />
     </View>

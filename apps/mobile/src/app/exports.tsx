@@ -1,15 +1,19 @@
 import * as LocalAuthentication from 'expo-local-authentication';
 import QRCode from 'react-native-qrcode-svg';
 import { useEffect, useState } from 'react';
-import { Text, View, useWindowDimensions } from 'react-native';
+import {Text, View, useWindowDimensions, Pressable} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { Link } from 'expo-router';
+import {Link, router} from 'expo-router';
 
 import { codesToGoogle, encodeGoogleExports } from '../utils/exports';
 import { type CodeList, getCodes } from '../utils/codes';
 import { type GoogleExports } from '../utils/import';
+import {Lucide} from "@react-native-vector-icons/lucide";
+import {useUnstableNativeVariable} from "nativewind";
 
 export default function ExportsPage() {
+  // @ts-ignore
+  const txtColor = useUnstableNativeVariable("--color-txt");
   const { height, width } = useWindowDimensions();
   const [codes, setCodes] = useState<CodeList>()
   const [exportData, setExportData] = useState<string>("no codes")
@@ -89,9 +93,12 @@ export default function ExportsPage() {
         </View>
       </View>
       <View className="bg-nav flex flex-row justify-evenly py-2">
-        <View className="rounded-full bg-delete">
-          <Link href="/" className="text-2xl text-center text-txt w-10 h-10">x</Link>
-        </View>
+        <Pressable onPress={() => {
+          // @ts-ignore
+          router.navigate('/');
+        }}>
+          <Lucide size={30} style={{color: txtColor}} className="bg-delete w-16 h-16 rounded-full text-center align-middle" name={"circle-off"}/>
+        </Pressable>
       </View>
       <StatusBar style="auto" hidden={true} />
     </View>

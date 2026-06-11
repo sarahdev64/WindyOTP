@@ -1,13 +1,20 @@
 import 'react-native-get-random-values';
 import {StatusBar} from 'expo-status-bar';
-import {View, FlatList} from 'react-native';
-import {Link} from 'expo-router';
+import {View, FlatList, Button, Pressable} from 'react-native';
+import {useRouter} from 'expo-router';
 import {type CodeList, getCodes} from '../utils/codes';
 import {useEffect, useState} from 'react';
-import "../global.css";
 import OtpCard from '../components/OtpCard';
+import { Lucide } from "@react-native-vector-icons/lucide";
+import "../global.css";
+
+import { useUnstableNativeVariable } from 'nativewind';
 
 export default function HomePage() {
+  // @ts-ignore
+  const txtColor = useUnstableNativeVariable("--color-txt");
+  const router = useRouter();
+  
   const [codes, setCodes] = useState<CodeList>({
     installDate: 0,
     codes: {}
@@ -43,12 +50,17 @@ export default function HomePage() {
         keyExtractor={item => item}
       />
       <View className="bg-nav flex flex-row justify-center py-2">
-        <View className="rounded-full bg-progress">
-          <Link href="/code" className="text-2xl text-center text-txt w-10 h-10">+</Link>
-        </View>
-        <View className="rounded-full bg-backdrop">
-          <Link href="/exports" className="font-semibold text-3xl text-txt px-4 py-2">{"\u2197"}</Link>
-        </View>
+        <Pressable onPress={() => {
+          // @ts-ignore
+          router.navigate('/code');
+        }}>
+          <Lucide size={30} style={{color: txtColor}} className="bg-progress w-16 h-16 rounded-full text-center align-middle" name={"plus"}/>
+        </Pressable>
+        {/*<Link href="/code" className="text-center align-middle mx-auto p-2">*/}
+        {/*</Link>*/}
+        {/*<View className="rounded-full bg-backdrop">*/}
+        {/*  <Link href="/exports" className="font-semibold text-3xl text-txt px-4 py-2">{"\u2197"}</Link>*/}
+        {/*</View>*/}
       </View>
       <StatusBar style="auto" hidden={true}/>
     </View>
