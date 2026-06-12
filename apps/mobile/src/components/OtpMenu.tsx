@@ -3,8 +3,8 @@ import { StyledButton as Button } from "./StyledButton";
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Device from "expo-device";
-import { type CodeList } from "../utils/codes";
-import { type TotpData } from "../utils/url";
+import { type CodeList } from "@/lib/codes";
+import { type TotpData } from "@/lib/url";
 import OtpRename from "./OtpRename";
 
 export default function OtpMenu({ name, data, setShowMenu, setRefresh }: {

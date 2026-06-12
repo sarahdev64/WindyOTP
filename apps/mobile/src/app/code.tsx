@@ -1,11 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
+import {StatusBar} from 'expo-status-bar';
 import {Text, View, Button, Pressable} from 'react-native';
-import { Link, router } from 'expo-router';
-import {useEffect, useRef, useState} from 'react';
-import {Camera, CameraView, useCameraPermissions} from 'expo-camera';
-import { type TotpData, validTotpUrl, parseTotpUrl } from '../utils/url';
-import { addCode } from '../utils/codes';
-import { type GoogleCode, type GoogleExports, decodeMigration, isMigration, toTotpData } from '../utils/import';
+import {router} from 'expo-router';
+import {useRef, useState} from 'react';
+import {CameraView, useCameraPermissions} from 'expo-camera';
+import {type TotpData, validTotpUrl, parseTotpUrl} from '@/lib/url';
+import {addCode} from '@/lib/codes';
+import {type GoogleCode, type GoogleExports, decodeMigration, isMigration, toTotpData} from '@/lib/import';
 import {Lucide} from "@react-native-vector-icons/lucide";
 import {useUnstableNativeVariable} from "nativewind";
 
@@ -18,24 +18,24 @@ type CodeState = {
 export default function CodePage() {
   // @ts-ignore
   const txtColor = useUnstableNativeVariable("--color-txt");
-  const [codeState, setCodeState] = useState<CodeState>({ invalid: false, showScan: true })
+  const [codeState, setCodeState] = useState<CodeState>({invalid: false, showScan: true})
   const [permission, requestPermission] = useCameraPermissions({
     get: true,
     request: true
   });
-  
+
   const cameraRef = useRef<CameraView>(null);
 
   if (!permission?.granted) {
-    return <Button onPress={requestPermission} title="Grant Camera Access" />;
+    return <Button onPress={requestPermission} title="Grant Camera Access"/>;
   }
 
-  const handleBarCodeScanned = async ({ type, data }: { type: any, data: string }) => {
+  const handleBarCodeScanned = async ({type, data}: { type: any, data: string }) => {
     const codeData: TotpData[] = [];
     const totpData: TotpData | null = validTotpUrl(data) ? parseTotpUrl(data) : null;
     const checkMigration = isMigration(data);
     if (!totpData && !checkMigration) {
-      setCodeState({ ...codeState, invalid: true });
+      setCodeState({...codeState, invalid: true});
       return
     }
 
@@ -62,7 +62,7 @@ export default function CodePage() {
       success = false;
     });
 
-    setCodeState({ ...codeState, scanned: true, invalid: !success, showScan: false })
+    setCodeState({...codeState, scanned: true, invalid: !success, showScan: false})
     console.log(`Success: ${success}`)
     if (success) {
       setTimeout(() => {
@@ -103,13 +103,13 @@ export default function CodePage() {
       </View>
       <View className="bg-nav flex flex-row justify-evenly py-2">
         <Pressable onPress={() => {
-          // @ts-ignore
           router.navigate('/');
         }}>
-          <Lucide size={30} style={{color: txtColor}} className="bg-delete w-16 h-16 rounded-full text-center align-middle" name={"circle-off"}/>
+          <Lucide size={30} style={{color: txtColor}}
+                  className="bg-delete w-16 h-16 rounded-full text-center align-middle" name={"circle-off"}/>
         </Pressable>
       </View>
-      <StatusBar style="auto" hidden={true} />
+      <StatusBar style="auto" hidden={true}/>
     </View>
   );
 }

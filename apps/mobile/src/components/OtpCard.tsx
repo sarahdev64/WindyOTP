@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
-import { getTotp } from "../utils/totp";
-import { type TotpData } from "../utils/url";
-import { decrypt } from "../utils/crypto";
+import { getTotp } from "@/lib/totp";
+import { type TotpData } from "@/lib/url";
+import { decrypt } from "@/lib/crypto";
 import OtpMenu from "./OtpMenu";
 
 export default function OtpCard({ name, data, setRefresh }: { name: string, data: TotpData, setRefresh: (val: number) => void }) {

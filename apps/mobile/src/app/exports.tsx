@@ -5,9 +5,9 @@ import {Text, View, useWindowDimensions, Pressable} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import {Link, router} from 'expo-router';
 
-import { codesToGoogle, encodeGoogleExports } from '../utils/exports';
-import { type CodeList, getCodes } from '../utils/codes';
-import { type GoogleExports } from '../utils/import';
+import { codesToGoogle, encodeGoogleExports } from '@/lib/exports';
+import { type CodeList, getCodes } from '@/lib/codes';
+import { type GoogleExports } from '@/lib/import';
 import {Lucide} from "@react-native-vector-icons/lucide";
 import {useUnstableNativeVariable} from "nativewind";
 
@@ -94,7 +94,6 @@ export default function ExportsPage() {
       </View>
       <View className="bg-nav flex flex-row justify-evenly py-2">
         <Pressable onPress={() => {
-          // @ts-ignore
           router.navigate('/');
         }}>
           <Lucide size={30} style={{color: txtColor}} className="bg-delete w-16 h-16 rounded-full text-center align-middle" name={"circle-off"}/>

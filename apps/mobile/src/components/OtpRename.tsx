@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
-import { type TotpData } from "../utils/url";
+import { type TotpData } from "@/lib/url";
 import { View } from "react-native";
 import { StyledButton as Button } from "./StyledButton";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Device from "expo-device";
-import { addCode, updateCode, type CodeList } from "../utils/codes";
+import { updateCode } from "@/lib/codes";
 
 export default function OtpRename({ name, data, setShowRename, setRefresh }: {
   name: string,

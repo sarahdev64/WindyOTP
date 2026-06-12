@@ -14,10 +14,9 @@ export default function SettingsPage() {
       </View>
       <View className="bg-nav flex flex-row justify-evenly py-2">
         <Pressable onPress={() => {
-          // @ts-ignore
           router.navigate('/');
         }}>
-          <Lucide size={30} style={{color: txtColor}} className="bg-delete w-16 h-16 rounded-full text-center align-middle" name={"circle-off"}/>
+          <Lucide size={30} style={{color: txtColor}} className="bg-delete w-16 h-16 rounded-full text-center align-middle" name={"home"}/>
         </Pressable>
       </View>
       <StatusBar style="auto" hidden={true}/>

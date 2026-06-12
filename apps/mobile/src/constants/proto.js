@@ -1,4 +1,4 @@
-export const authBuffer = `
+export const AUTH_BUFFER = `
 syntax = "proto3";
 package WindyOTP;
 

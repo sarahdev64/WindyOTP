@@ -1,8 +1,8 @@
 import 'react-native-get-random-values';
 import {StatusBar} from 'expo-status-bar';
 import {View, FlatList, Button, Pressable} from 'react-native';
-import {useRouter} from 'expo-router';
-import {type CodeList, getCodes} from '../utils/codes';
+import {router, useRouter} from 'expo-router';
+import {type CodeList, getCodes} from '@/lib/codes';
 import {useEffect, useState} from 'react';
 import OtpCard from '../components/OtpCard';
 import { Lucide } from "@react-native-vector-icons/lucide";
@@ -33,6 +33,13 @@ export default function HomePage() {
 
   return (
     <View className="bg-backdrop flex flex-col h-full">
+      <View className="flex flex-row justify-end p-2 pb-0">
+        <Pressable onPress={() => {
+          router.navigate('/settings');
+        }}>
+          <Lucide size={30} style={{color: txtColor}} className="bg-card w-16 h-16 rounded-full text-center align-middle" name={"settings"}/>
+        </Pressable>
+      </View>
       <FlatList
         scrollEnabled={true}
         scrollToOverflowEnabled={true}
@@ -48,19 +55,14 @@ export default function HomePage() {
           )
         }}
         keyExtractor={item => item}
+        className="p-2"
       />
-      <View className="bg-nav flex flex-row justify-center py-2">
+      <View className="bg-nav flex flex-row py-2 justify-center">
         <Pressable onPress={() => {
-          // @ts-ignore
           router.navigate('/code');
         }}>
           <Lucide size={30} style={{color: txtColor}} className="bg-progress w-16 h-16 rounded-full text-center align-middle" name={"plus"}/>
         </Pressable>
-        {/*<Link href="/code" className="text-center align-middle mx-auto p-2">*/}
-        {/*</Link>*/}
-        {/*<View className="rounded-full bg-backdrop">*/}
-        {/*  <Link href="/exports" className="font-semibold text-3xl text-txt px-4 py-2">{"\u2197"}</Link>*/}
-        {/*</View>*/}
       </View>
       <StatusBar style="auto" hidden={true}/>
     </View>

@@ -1,9 +1,0 @@
-language: "Node"
-
-tasks:
-  serve:
-    command: "npx vue-cli-service serve"
-  build:
-    command: "npx vue-cli-service build"
-  lint:
-    command: "npx vue-cli-service lint"

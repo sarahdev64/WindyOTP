@@ -1,4 +1,4 @@
-# [WindyOTP](https://otp.robbryan.dev)
+# [WindyOTP](https://otp.sarahb.dev)
 
 An authenticator app customizable through a sensible tailwind config.
 Made possible using [NativeWind](https://www.nativewind.dev/)
@@ -14,20 +14,6 @@ Made possible using [NativeWind](https://www.nativewind.dev/)
 - digits: 6 | 8
 - periods: 15 | 30 | 60
 - algorithms: sha1 | sha256 | sha512 | md5
-
-## Requirements
-- [MoonRepo](https://moonrepo.dev/)
-
-## Local Development
-### Mobile app
-```bash
-moon mobile:start
-```
-
-### Showcase site
-```bash
-moon site:serve
-```
 
 ## Building
 ### Mobile app
