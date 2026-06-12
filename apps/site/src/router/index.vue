@@ -9,9 +9,9 @@
         </div>
         <div class="flex flex-row pt-8 justify-evenly">
           <a class="border-b-2 border-spacing-2 border-lime-400 text-white"
-            href="https://github.com/robbryandev/WindyOTP/releases">Download</a>
+            href="https://github.com/sarahdev64/WindyOTP/releases">Download</a>
           <a class="border-b-2 border-spacing-2 border-lime-400 text-white"
-            href="https://github.com/robbryandev/WindyOTP">Github</a>
+            href="https://github.com/sarahdev64/WindyOTP">Github</a>
         </div>
       </div>
       <div class="relative top-20 left-20 md:block hidden">
