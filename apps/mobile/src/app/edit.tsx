@@ -23,8 +23,6 @@ export default function EditPage() {
   const [data, setData] = useState<TotpData>();
   
   const [showDelete, setShowDelete] = useState<boolean>(false);
-  const [showRename, setShowRename] = useState<boolean>(false);
-  
 
   // Get codes
   useEffect(() => {
@@ -48,9 +46,6 @@ export default function EditPage() {
     promptDelete: () => {
       setShowDelete(true);
     },
-    rename: () => {
-      setShowRename(true);
-    },
     delete: async () => {
       const modelName: string = Device.modelName ?? "unknown";
       delete codes.codes[keyName];
@@ -58,7 +53,12 @@ export default function EditPage() {
       router.navigate("/");
     },
     export: () => {
-      
+      router.navigate({
+        pathname: "/exports",
+        params: {
+          keyName: keyName
+        }
+      })
     }
   };
   
@@ -101,12 +101,12 @@ export default function EditPage() {
                     <Lucide size={30} style={{color: txtColor}} className="bg-delete w-16 h-16 rounded-full text-center align-middle" name={"trash"}/>
                     <Text className="text-txt text-xl align-middle">Delete</Text>
                   </Pressable>
-                  {/*<Pressable onPress={() => {*/}
-                  {/*  actions.export();*/}
-                  {/*}}>*/}
-                  {/*  <Lucide size={30} style={{color: txtColor}} className="bg-card w-16 h-16 rounded-full text-center align-middle" name={"arrow-up-right"}/>*/}
-                  {/*  <Text className="text-txt text-xl align-middle">Export</Text>*/}
-                  {/*</Pressable>*/}
+                  <Pressable onPress={() => {
+                    actions.export();
+                  }}>
+                    <Lucide size={30} style={{color: txtColor}} className="bg-card w-16 h-16 rounded-full text-center align-middle" name={"arrow-up-right"}/>
+                    <Text className="text-txt text-xl align-middle">Export</Text>
+                  </Pressable>
                 </View>
               </View>
               </KeyboardAvoidingView>

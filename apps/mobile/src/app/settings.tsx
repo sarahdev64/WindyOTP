@@ -1,6 +1,6 @@
 import {StatusBar} from 'expo-status-bar';
-import {Pressable, View} from 'react-native';
-import {Link, router} from "expo-router";
+import {Pressable, View, Text} from 'react-native';
+import {router} from "expo-router";
 import {useUnstableNativeVariable} from "nativewind";
 import {Lucide} from "@react-native-vector-icons/lucide";
 
@@ -9,8 +9,13 @@ export default function SettingsPage() {
   const txtColor = useUnstableNativeVariable("--color-txt");
   
   return (
-    <View className="bg-backdrop flex-col h-full">
-      <View className="h-full shrink">
+    <View className="bg-backdrop flex flex-col h-full">
+      <View className="h-full flex flex-col shrink px-2 py-20">
+        <Pressable onPress={() => {
+          router.navigate('/exports');
+        }} className="w-full border border-progress/50 rounded-lg p-2">
+          <Text className="text-txt text-2xl text-center">Export</Text>
+        </Pressable>
       </View>
       <View className="bg-nav flex flex-row justify-evenly py-2">
         <Pressable onPress={() => {
