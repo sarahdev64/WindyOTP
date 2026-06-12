@@ -3,7 +3,7 @@ import QRCode from 'react-native-qrcode-svg';
 import { useEffect, useState } from 'react';
 import {Text, View, useWindowDimensions, Pressable} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import {Link, router} from 'expo-router';
+import {router} from 'expo-router';
 
 import { codesToGoogle, encodeGoogleExports } from '@/lib/exports';
 import { type CodeList, getCodes } from '@/lib/codes';

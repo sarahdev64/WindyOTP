@@ -1,7 +1,7 @@
 import 'react-native-get-random-values';
 import {StatusBar} from 'expo-status-bar';
-import {View, FlatList, Button, Pressable} from 'react-native';
-import {router, useRouter} from 'expo-router';
+import {View, Pressable} from 'react-native';
+import {useRouter} from 'expo-router';
 import {type CodeList, getCodes} from '@/lib/codes';
 import {useEffect, useState} from 'react';
 import OtpCard from '../components/OtpCard';
@@ -9,6 +9,8 @@ import { Lucide } from "@react-native-vector-icons/lucide";
 import "../global.css";
 
 import { useUnstableNativeVariable } from 'nativewind';
+import {SwipeListView, SwipeRow} from "react-native-swipe-list-view";
+import OtpMenu from "@/components/OtpMenu";
 
 export default function HomePage() {
   // @ts-ignore
@@ -40,9 +42,11 @@ export default function HomePage() {
           <Lucide size={30} style={{color: txtColor}} className="bg-card w-16 h-16 rounded-full text-center align-middle" name={"settings"}/>
         </Pressable>
       </View>
-      <FlatList
+      <SwipeListView
         scrollEnabled={true}
         scrollToOverflowEnabled={true}
+        disableLeftSwipe={true}
+        leftOpenValue={80}
         data={Object.keys(codes.codes)}
         renderItem={({item, index}) => {
           return (
@@ -51,6 +55,14 @@ export default function HomePage() {
               name={codes!.codes[item].account}
               data={codes!.codes[item]}
               setRefresh={setRefresh}
+            />
+          )
+        }}
+        renderHiddenItem={({item, index}) => {
+          return (
+            <OtpMenu
+              key={index}
+              name={item}
             />
           )
         }}

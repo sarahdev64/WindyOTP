@@ -1,69 +1,28 @@
-import { View } from "react-native";
-import { StyledButton as Button } from "./StyledButton";
-import { useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Device from "expo-device";
-import { type CodeList } from "@/lib/codes";
-import { type TotpData } from "@/lib/url";
-import OtpRename from "./OtpRename";
+import {View, Pressable} from "react-native";
+import {Lucide} from "@react-native-vector-icons/lucide";
+import {useUnstableNativeVariable} from "nativewind";
+import { router } from "expo-router";
 
-export default function OtpMenu({ name, data, setShowMenu, setRefresh }: {
-  name: string,
-  data: TotpData,
-  setShowMenu: (val: boolean) => void,
-  setRefresh: (val: number) => void
+export default function OtpMenu({ name }: {
+  name: string
 }) {
-  const [showConfirm, setShowConfirm] = useState<Boolean>(false)
-  const [showRename, setShowRename] = useState<Boolean>(false);
+  // @ts-ignore
+  const txtColor = useUnstableNativeVariable("--color-txt");
   
   return (
-    <>
-      {showRename ? (
-        <OtpRename name={name} data={data} setShowRename={setShowRename} setRefresh={setRefresh} />
-      ) : (
-        <View className="flex flex-row gap-4 h-12 my-2">
-          {!showConfirm ? (
-            <>
-              <Button title="Cancel" className="px-2 py-1" onPress={() => {
-                setShowMenu(false)
-              }} />
-              <Button title="Delete" className="bg-delete px-2 py-1" onPress={() => {
-                setShowConfirm(true)
-              }} />
-              <Button title="Rename" className="bg-rename px-2 py-1" onPress={() => {
-                setShowRename(true)
-              }} />
-            </>
-          ) : (
-            <>
-              <Button title="Delete" className="bg-delete px-2 py-1" onPress={() => {
-                // Add delete code
-                AsyncStorage.getItem(Buffer.from(Device.modelName ?? "unknown").toString("hex")).then((res: string | null) => {
-                  if (res === null || res === "") {
-                      return;
-                  }
-                  
-                  const codes: CodeList = JSON.parse(res);
-                  delete codes.codes[data.account];
-                  AsyncStorage.setItem(Buffer.from(Device.modelName ?? "unknown").toString("hex"), JSON.stringify(codes)).then((res) => {
-                    setRefresh(Math.random())
-                  }).catch((err) => {
-                    console.log(`Delete error 1: ${err}`)
-                  });
-                }).catch((err) => {
-                  console.log(`Delete error: ${err}`)
-                })
-                setShowConfirm(false)
-                setShowMenu(false)
-              }} />
-              <Button title="Cancel" className="px-2 py-1" onPress={() => {
-                setShowConfirm(false)
-                setShowMenu(false)
-              }} />
-            </>
-          )}
-        </View>
-      )}
-    </>
+    <View className="w-24 h-24 bg-card border mt-2 border-progress/50 rounded-lg">
+      <View className="w-full h-full flex flex-col py-2 justify-center">
+        <Pressable onPress={() => {
+          router.navigate({
+            pathname: "/edit",
+            params: {
+              keyName: name
+            }
+          })
+        }}>
+          <Lucide size={30} style={{color: txtColor}} className="w-10 h-10 text-center mx-auto align-middle" name={"edit"}/>
+        </Pressable>
+      </View>
+    </View>
   )
 }

@@ -2,7 +2,7 @@ import * as protobuf from 'protobufjs';
 import { type SupportedAlgorithms, type GoogleCode, type GoogleExports } from "./import";
 import { type TotpData } from "./url";
 import { decrypt } from "./crypto";
-import { authBuffer } from '../data/proto';
+import {AUTH_BUFFER} from "@/constants/proto";
 
 export async function codesToGoogle(codes: TotpData[]): Promise<GoogleExports> {
   const result: GoogleExports = {
@@ -37,7 +37,7 @@ export async function codesToGoogle(codes: TotpData[]): Promise<GoogleExports> {
 }
 
 export async function encodeGoogleExports(codes: GoogleExports): Promise<Uint8Array> {
-  const getRoot = await protobuf.parse(authBuffer);
+  const getRoot = await protobuf.parse(AUTH_BUFFER);
   const root = getRoot.root;
   const GoogleAuthenticatorImport = root.lookupType('WindyOTP.GoogleAuthenticatorImport');
   const encodedExports = GoogleAuthenticatorImport.encode(GoogleAuthenticatorImport.fromObject(codes)).finish();

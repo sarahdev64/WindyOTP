@@ -16,7 +16,7 @@ export default function SettingsPage() {
         <Pressable onPress={() => {
           router.navigate('/');
         }}>
-          <Lucide size={30} style={{color: txtColor}} className="bg-delete w-16 h-16 rounded-full text-center align-middle" name={"home"}/>
+          <Lucide size={30} style={{color: txtColor}} className="bg-card w-16 h-16 rounded-full text-center align-middle" name={"home"}/>
         </Pressable>
       </View>
       <StatusBar style="auto" hidden={true}/>

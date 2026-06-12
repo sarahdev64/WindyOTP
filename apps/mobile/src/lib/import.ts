@@ -1,6 +1,6 @@
 import * as protobuf from 'protobufjs';
 import { TotpDigits, type TotpData, TotpAlgorithm } from './url';
-import { authBuffer } from '../data/proto';
+import {AUTH_BUFFER} from "@/constants/proto";
 
 export type SupportedAlgorithms = "ALGORITHM_UNSPECIFIED" | "ALGORITHM_SHA1" |
   "ALGORITHM_SHA256" | "ALGORITHM_SHA512" | "ALGORITHM_MD5";
@@ -66,7 +66,7 @@ export async function decodeMigration(url: string): Promise<GoogleExports> {
     const dataArray = new Uint8Array(decodedData);
 
     // Load the protobuf definition
-    const getRoot = await protobuf.parse(authBuffer);
+    const getRoot = await protobuf.parse(AUTH_BUFFER);
     const root = getRoot.root;
 
     // Resolve the GoogleAuthenticatorImport message type

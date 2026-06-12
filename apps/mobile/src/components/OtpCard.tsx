@@ -6,7 +6,6 @@ import { decrypt } from "@/lib/crypto";
 import OtpMenu from "./OtpMenu";
 
 export default function OtpCard({ name, data, setRefresh }: { name: string, data: TotpData, setRefresh: (val: number) => void }) {
-    const [showMenu, setShowMenu] = useState<Boolean>(false)
     const [thisCode, setThisCode] = useState<string>("error")
     const getCounter = () => {
         const counterVal = Math.floor(Date.now() / 1000 % data.period);
@@ -36,29 +35,21 @@ export default function OtpCard({ name, data, setRefresh }: { name: string, data
     }, [percentage])
 
     return (
-        <TouchableOpacity className="w-full h-auto bg-card bor border mt-2 border-progress/50 rounded-lg" onLongPress={() => setShowMenu(true)}>
+        <View className="w-full h-24 bg-card border mt-2 border-progress/50 rounded-lg">
             <View className="flex flex-row px-4 gap-6">
                 <View>
                     <Text className="text-txt text-lg">{name}</Text>
-                    {
-                        showMenu ? (
-                            <OtpMenu name={name} data={data} setShowMenu={setShowMenu} setRefresh={setRefresh} />
-                        ) : (
-                            <View className="flex flex-row space-x-2">
-                                <Text className="text-txt text-2xl pb-2">{thisCode.substring(0, Math.floor(thisCode.length / 2))}</Text>
-                                <Text className="text-txt text-2xl pb-2">{thisCode.substring(Math.floor(thisCode.length / 2), thisCode.length)}</Text>
-                            </View>
-                        )
-                    }
+                    <View className="flex flex-row space-x-2">
+                        <Text className="text-txt text-2xl pb-2">{thisCode.substring(0, Math.floor(thisCode.length / 2))}</Text>
+                        <Text className="text-txt text-2xl pb-2">{thisCode.substring(Math.floor(thisCode.length / 2), thisCode.length)}</Text>
+                    </View>
                 </View>
             </View>
             <View className="w-11/12 mx-auto pb-2">
-                {!showMenu ? (
-                    <View className="h-4 bg-progress" style={{
-                        width: `${percentage}%`
-                    }} />
-                ) : null}
+                <View className="h-4 bg-progress" style={{
+                    width: `${percentage}%`
+                }} />
             </View>
-        </TouchableOpacity>
+        </View>
     )
 }
