@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { getTotp } from "@/lib/totp";
 import { type TotpData } from "@/lib/url";
 import { decrypt } from "@/lib/crypto";
-import OtpMenu from "./OtpMenu";
 
 export default function OtpCard({ name, data, setRefresh }: { name: string, data: TotpData, setRefresh: (val: number) => void }) {
     const [thisCode, setThisCode] = useState<string>("error")
@@ -35,7 +34,7 @@ export default function OtpCard({ name, data, setRefresh }: { name: string, data
     }, [percentage])
 
     return (
-        <View className="w-full h-24 bg-card border mt-2 border-progress/50 rounded-lg">
+        <View className="w-full h-24 bg-card border mt-2 border-primary/50 rounded-lg">
             <View className="flex flex-row px-4 gap-6">
                 <View>
                     <Text className="text-txt text-lg">{name}</Text>
@@ -46,7 +45,7 @@ export default function OtpCard({ name, data, setRefresh }: { name: string, data
                 </View>
             </View>
             <View className="w-11/12 mx-auto pb-2">
-                <View className="h-4 bg-progress" style={{
+                <View className="h-4 bg-primary" style={{
                     width: `${percentage}%`
                 }} />
             </View>

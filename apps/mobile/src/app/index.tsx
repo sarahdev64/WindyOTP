@@ -6,10 +6,9 @@ import {type CodeList, getCodes} from '@/lib/codes';
 import {useEffect, useState} from 'react';
 import OtpCard from '../components/OtpCard';
 import { Lucide } from "@react-native-vector-icons/lucide";
-import "../global.css";
 
 import { useUnstableNativeVariable } from 'nativewind';
-import {SwipeListView, SwipeRow} from "react-native-swipe-list-view";
+import {SwipeListView} from "react-native-swipe-list-view";
 import OtpMenu from "@/components/OtpMenu";
 
 export default function HomePage() {
@@ -73,7 +72,7 @@ export default function HomePage() {
         <Pressable onPress={() => {
           router.navigate('/code');
         }}>
-          <Lucide size={30} style={{color: txtColor}} className="bg-progress w-16 h-16 rounded-full text-center align-middle" name={"plus"}/>
+          <Lucide size={30} style={{color: txtColor}} className="bg-primary w-16 h-16 rounded-full text-center align-middle" name={"plus"}/>
         </Pressable>
       </View>
       <StatusBar style="auto" hidden={true}/>

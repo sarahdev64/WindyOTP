@@ -10,7 +10,7 @@ export default function OtpMenu({ name }: {
   const txtColor = useUnstableNativeVariable("--color-txt");
   
   return (
-    <View className="w-24 h-24 bg-card border mt-2 border-progress/50 rounded-lg">
+    <View className="w-24 h-24 bg-card border mt-2 border-primary/50 rounded-lg">
       <View className="w-full h-full flex flex-col py-2 justify-center">
         <Pressable onPress={() => {
           router.navigate({

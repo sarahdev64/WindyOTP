@@ -3,6 +3,7 @@ import {Pressable, View, Text} from 'react-native';
 import {router} from "expo-router";
 import {useUnstableNativeVariable} from "nativewind";
 import {Lucide} from "@react-native-vector-icons/lucide";
+import CustomColorPicker from "@/components/CustomColorPicker";
 
 export default function SettingsPage() {
   // @ts-ignore
@@ -13,9 +14,12 @@ export default function SettingsPage() {
       <View className="h-full flex flex-col shrink px-2 py-20">
         <Pressable onPress={() => {
           router.navigate('/exports');
-        }} className="w-full border border-progress/50 rounded-lg p-2">
+        }} className="w-full bg-card border border-primary/50 rounded-lg p-2">
           <Text className="text-txt text-2xl text-center">Export</Text>
         </Pressable>
+        <View className="py-10">
+          <CustomColorPicker themeName={"default"}/>
+        </View>
       </View>
       <View className="bg-nav flex flex-row justify-evenly py-2">
         <Pressable onPress={() => {

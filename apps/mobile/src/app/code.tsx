@@ -106,7 +106,7 @@ export default function CodePage() {
           router.navigate('/');
         }}>
           <Lucide size={30} style={{color: txtColor}}
-                  className="bg-delete w-16 h-16 rounded-full text-center align-middle" name={"circle-off"}/>
+                  className="bg-danger w-16 h-16 rounded-full text-center align-middle" name={"circle-off"}/>
         </Pressable>
       </View>
       <StatusBar style="auto" hidden={true}/>

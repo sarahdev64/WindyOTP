@@ -1,5 +1,5 @@
 import {StatusBar} from 'expo-status-bar';
-import {Pressable, View, TextInput, Text, Modal, KeyboardAvoidingView, Platform} from 'react-native';
+import {Pressable, View, TextInput, Text, Modal, KeyboardAvoidingView} from 'react-native';
 import {router, useLocalSearchParams} from "expo-router";
 import {useUnstableNativeVariable} from "nativewind";
 import {Lucide} from "@react-native-vector-icons/lucide";
@@ -70,7 +70,7 @@ export default function EditPage() {
             <KeyboardAvoidingView behavior={"padding"}>
               <View className={`px-2 ${showDelete ? "blur-sm" : ""}`}>
                 <Modal visible={showDelete} transparent={true} animationType={"slide"} presentationStyle={"overFullScreen"}>
-                  <View className="w-full h-1/3 p-10 border border-delete/50 bg-nav flex flex-col justify-center rounded-lg">
+                  <View className="w-full h-1/3 p-10 border border-danger/50 bg-nav flex flex-col justify-center rounded-lg">
                     <Text className="text-txt text-2xl">Are you sure you want to delete: {data?.account}?</Text>
                     <View className="flex flex-row gap-10 py-10">
                       <Pressable onPress={() => {
@@ -82,7 +82,7 @@ export default function EditPage() {
                       <Pressable onPress={async () => {
                         await actions.delete();
                       }}>
-                        <Lucide size={30} style={{color: txtColor}} className="bg-delete w-16 h-16 rounded-full text-center align-middle" name={"trash"}/>
+                        <Lucide size={30} style={{color: txtColor}} className="bg-danger w-16 h-16 rounded-full text-center align-middle" name={"trash"}/>
                         <Text className="text-txt text-xl align-middle">Delete</Text>
                       </Pressable>
                     </View>
@@ -90,7 +90,7 @@ export default function EditPage() {
                 </Modal>
                   <View className="flex flex-row gap-2">
                     <Text className="text-txt text-xl align-middle">Name</Text>
-                    <TextInput className="text-txt text-xl bg-card border border-progress/50 rounded-full grow" value={data.account} onChangeText={(val) => {
+                    <TextInput className="text-txt text-xl bg-card border border-primary/50 rounded-full grow" value={data.account} onChangeText={(val) => {
                       setData({...data, account: val});
                     }}/>
                   </View>
@@ -98,7 +98,7 @@ export default function EditPage() {
                   <Pressable onPress={() => {
                     actions.promptDelete();
                   }}>
-                    <Lucide size={30} style={{color: txtColor}} className="bg-delete w-16 h-16 rounded-full text-center align-middle" name={"trash"}/>
+                    <Lucide size={30} style={{color: txtColor}} className="bg-danger w-16 h-16 rounded-full text-center align-middle" name={"trash"}/>
                     <Text className="text-txt text-xl align-middle">Delete</Text>
                   </Pressable>
                   <Pressable onPress={() => {
@@ -122,7 +122,7 @@ export default function EditPage() {
         <Pressable onPress={async () => {
           await actions.save();
         }}>
-          <Lucide size={30} style={{color: txtColor}} className="bg-progress w-16 h-16 rounded-full text-center align-middle" name={"save"}/>
+          <Lucide size={30} style={{color: txtColor}} className="bg-primary w-16 h-16 rounded-full text-center align-middle" name={"save"}/>
         </Pressable>
       </View>
       <StatusBar style="auto" hidden={true}/>

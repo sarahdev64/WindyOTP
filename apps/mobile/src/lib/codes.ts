@@ -31,11 +31,11 @@ export async function getCodes(): Promise<CodeList> {
     const modelName: string = Device.modelName ?? "unknown";
     const timeStamp: number = new Date().getTime()
     const newList: CodeList = { installDate: timeStamp, codes: {} }
-    console.log("Setting storage item buffer");
+    
     const storageItem = Buffer.from(modelName).toString("hex");
-    console.log(`Set storage item buffer: ${storageItem}`);
+
     let val = await AsyncStorage.getItem(storageItem);
-    console.log("Tried getting storage item from asyncstorage");
+
     if (!val) {
         val = JSON.stringify(newList);
         await AsyncStorage.setItem(Buffer.from(modelName).toString("hex"), val).catch((err) => {
