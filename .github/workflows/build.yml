@@ -12,6 +12,7 @@ jobs:
       - name: Expo GitHub Action
         uses: expo/expo-github-action@9.0.0
         with:
+          eas-version: latest
           packager: npm
           token: ${{ secrets.EXPO_TOKEN }}
       
