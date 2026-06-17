@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - run: cd ./apps/mobile
+        with:
+          sparse-checkout: 'apps/mobile'
       
       - name: Expo GitHub Action
         uses: expo/expo-github-action@9.0.0
