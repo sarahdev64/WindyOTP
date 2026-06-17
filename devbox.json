@@ -1,7 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.0/.schema/devbox.schema.json",
   "packages": [
-    "nodejs@24"
+    "nodejs@24",
+    "openjdk@19.0.1",
+    "gradle_9@9.4.1"
   ],
   "shell": {
     "init_hook": [
