@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme static {
+    --color-backdrop: "#262626";
+    --color-nav: "#171717";
+    --color-txt: "#ffffff";
+    --color-input: "#ffffff";
+    --color-card: "#404040";
+    --color-primary: "#10b981";
+    --color-danger: "#dc2626";
+}

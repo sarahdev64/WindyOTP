@@ -10,6 +10,7 @@ Made possible using [NativeWind](https://www.nativewind.dev/)
 - Migrate all totp codes from [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&pli=1) Or Other WindyOTP install
 - Export support guarded with device biometrics
 - Great support for different TOTP implementations
+- All theme color variables are changeable in-app
 ### TOTP Support
 - digits: 6 | 8
 - periods: 15 | 30 | 60
