@@ -5,4 +5,7 @@ services:
     ports:
       - ${PORT}:${PORT}
     env_file:
-      - .env
+      - path: default.env
+        required: true
+      - path: .env
+        required: false
