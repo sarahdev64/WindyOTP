@@ -1,8 +1,7 @@
 # =========================================
 # Stage 1: Build the Vue.js Application
 # =========================================
-# Use a lightweight DHI Node.js image for building
-FROM dhi.io/node:24-alpine3.22-dev AS builder
+FROM node:24-alpine3.23 AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -23,7 +22,7 @@ RUN npm run build
 # Stage 2: Serve the Vue.js Application
 # =========================================
 
-FROM dhi.io/node:24-alpine3.22-dev AS runner
+FROM node:24-alpine3.23 AS runner
 
 # Set the working directory
 WORKDIR /app
