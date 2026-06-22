@@ -27,12 +27,16 @@ FROM node:24-alpine3.23 AS runner
 # Set the working directory
 WORKDIR /app
 
+# Define a default port
+ARG PORT=8080
+ENV PORT=${PORT}
+
 # Copy the build output from the builder stage
 COPY --from=builder /app/dist /app/dist
 
-# Expose port 8080
-EXPOSE 8080
+# Expose the port defined in ENV
+EXPOSE ${PORT}
 
-# Use npx serve to host the application on port 8080
+# Use npx serve to host the application
 # --single flag is often used for SPA (Single Page Applications) to redirect all requests to index.html
-ENTRYPOINT ["npx", "serve", "-s", "dist", "-l", "8080"]
+ENTRYPOINT ["sh", "-c", "npx serve -s dist -l ${PORT}"]
