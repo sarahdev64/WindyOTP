@@ -14,14 +14,14 @@
         </div>
       <PhoneDisplay display="main" />
     </div>
-    <div class="min-h-screen h-full w-full bg-neutral-100">
-      <div class="text-center w-200 mx-auto">
-        <h1 class="text-4xl prose py-4 font-semibold uppercase">features</h1>
+    <div class="min-h-screen h-full w-full flex flex-col md:flex-row justify-center items-center md:gap-44 bg-neutral-100">
+        <div class="w-56 md:w-200 md:mx-auto text-center md:text-left">
+        <h1 class="text-4xl py-4 prose font-semibold uppercase md:text-center">features</h1>
         <Carousel v-bind="carouselConfig">
           <Slide v-for="slide in 4" :key="slide">
-            <div class="flex flex-row justify-center items-center my-20">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-20 md:gap-0 my-20">
               <PhoneDisplay :display="Object.keys(displays)[slide - 1]" />
-              <div class="text-left w-80">
+              <div class="text-left w-44 md:w-80">
                 <p v-if="displayData.length >= slide
                   && typeof displayData[slide - 1]![1]?.summary !== `undefined`">{{displayData[slide - 1]![1]?.summary}}</p>
                 <p v-else>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata</p>
